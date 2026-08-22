@@ -6,6 +6,7 @@ import unittest
 from safety import evaluate_query
 from safety.models import QueryIntent, RiskLevel
 from ui_theme import Theme
+from safety.models import SafetyDecision
 
 class TestSafetyEngine(unittest.TestCase):
 
