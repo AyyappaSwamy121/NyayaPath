@@ -5,7 +5,7 @@ Unit test suite for NyayaPath multi-layer safety classification & policy decisio
 import unittest
 from safety import evaluate_query
 from safety.models import QueryIntent, RiskLevel
-
+from ui_theme import Theme
 
 class TestSafetyEngine(unittest.TestCase):
 
