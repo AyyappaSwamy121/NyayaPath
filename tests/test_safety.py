@@ -8,6 +8,7 @@ from safety.models import QueryIntent, RiskLevel
 from ui_theme import Theme
 from safety.models import SafetyDecision
 from typing import List
+from dataclasses import dataclass
 
 class TestSafetyEngine(unittest.TestCase):
 
