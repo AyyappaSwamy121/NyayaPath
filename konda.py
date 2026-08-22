@@ -1,1 +1,0 @@
-print("kondababu loves kondammaa")
