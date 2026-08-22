@@ -12,7 +12,7 @@ import os
 import time
 import google.generativeai as genai
 from typing import Tuple, Optional
-
+from dataclasses import dataclass   
 
 from prompts import SYSTEM_PROMPT
 from safety.models import SafetyDecision, AIResponse
