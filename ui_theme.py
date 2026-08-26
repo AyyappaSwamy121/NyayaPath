@@ -1,5 +1,7 @@
 """
-UI Theme and Design System for NyayaPath - Glassmorphism & Elegant Civic Design.
+Apple-Grade Premium Design System for NyayaPath.
+Provides explicit light-theme contrast rules, crisp typography, custom pill buttons,
+and full dark-mode override for Streamlit widgets.
 """
 
 import streamlit as st
@@ -7,468 +9,657 @@ import streamlit as st
 
 def inject_custom_css():
     """
-    Inject custom CSS for glassmorphic design system, vibrant typography,
-    subtle glowing accents, and crisp readability across dark & light modes.
+    Inject custom CSS to guarantee 100% text contrast, Apple styling,
+    and prevent Streamlit dark-mode text masking.
     """
     st.markdown("""
         <style>
-            /* Import Google Fonts */
-            @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+            /* Import Apple SF Pro-like Clean Google Fonts */
+            @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-            /* Global App Glassmorphic Canvas */
-            .stApp {
-                background: radial-gradient(circle at 15% 15%, rgba(30, 41, 89, 0.6) 0%, rgba(15, 23, 42, 0.98) 55%, rgba(10, 15, 28, 1) 100%),
-                            url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2338bdf8' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") !important;
-                background-attachment: fixed !important;
-                color: #F8FAFC !important;
-                font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+            :root {
+                --apple-bg: #F5F5F7;
+                --apple-card-bg: #FFFFFF;
+                --apple-sidebar-bg: #FAFAFC;
+                --apple-text-primary: #1D1D1F;
+                --apple-text-secondary: #515154;
+                --apple-text-tertiary: #86868B;
+                --apple-blue: #0071E3;
+                --apple-blue-hover: #0077ED;
+                --apple-blue-light: rgba(0, 113, 227, 0.08);
+                --apple-emerald: #34C759;
+                --apple-border: rgba(0, 0, 0, 0.08);
+                --apple-border-strong: #D2D2D7;
+                --apple-radius-sm: 10px;
+                --apple-radius-md: 14px;
+                --apple-radius-lg: 20px;
+                --apple-radius-pill: 9999px;
+                --apple-shadow-subtle: 0 2px 12px rgba(0, 0, 0, 0.03);
+                --apple-shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04);
+                --apple-shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.08);
             }
 
-            /* Main Page Container */
-            .main .block-container {
-                max-width: 860px;
-                padding-top: 2rem;
-                padding-bottom: 4rem;
+            /* ==========================================================================
+               GLOBAL THEME OVERRIDES (Guarantees Contrast in Dark & Light Modes)
+               ========================================================================== */
+            .stApp, [data-testid="stAppViewContainer"], .main, .main .block-container {
+                background-color: var(--apple-bg) !important;
+                color: var(--apple-text-primary) !important;
+                font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+                -webkit-font-smoothing: antialiased;
             }
 
-            /* Transparent Header */
-            [data-testid="stHeader"] {
+            /* Clean up Streamlit Header & Navigation */
+            header[data-testid="stHeader"] {
                 background: transparent !important;
+                box-shadow: none !important;
+            }
+            div[data-testid="stSidebarNav"] {
+                display: none !important;
+            }
+            .stDeployButton {
+                display: none !important;
             }
 
-            /* Sidebar Glassmorphism */
-            [data-testid="stSidebar"] {
-                background: rgba(15, 23, 42, 0.75) !important;
-                backdrop-filter: blur(24px) saturate(180%) !important;
-                -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-                border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
-            }
-            [data-testid="stSidebar"] * {
-                color: #E2E8F0 !important;
+            /* Container Max-Width */
+            .main .block-container {
+                max-width: 840px !important;
+                padding-top: 1.5rem !important;
+                padding-bottom: 5rem !important;
             }
 
-            /* Streamlit Inputs Glass Styling */
-            div[data-baseweb="select"] > div,
-            div[data-baseweb="base-input"] > div,
-            textarea {
-                background: rgba(30, 41, 59, 0.55) !important;
-                backdrop-filter: blur(16px) !important;
-                -webkit-backdrop-filter: blur(16px) !important;
-                border: 1px solid rgba(255, 255, 255, 0.14) !important;
-                border-radius: 12px !important;
-                color: #F8FAFC !important;
-                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
-                transition: all 0.25s ease !important;
-            }
-
-            div[data-baseweb="select"] > div:hover,
-            div[data-baseweb="base-input"] > div:hover,
-            textarea:hover,
-            textarea:focus {
-                border-color: rgba(56, 189, 248, 0.6) !important;
-                box-shadow: 0 0 16px rgba(56, 189, 248, 0.25), 0 4px 20px rgba(0, 0, 0, 0.3) !important;
-            }
-
-            /* Dropdown Listbox Glass Styling */
-            div[role="listbox"] {
-                background: rgba(15, 23, 42, 0.95) !important;
-                backdrop-filter: blur(20px) !important;
-                border: 1px solid rgba(56, 189, 248, 0.3) !important;
-                border-radius: 12px !important;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
-            }
-            div[role="option"] {
-                color: #F8FAFC !important;
-                border-radius: 8px !important;
-            }
-            div[role="option"]:hover, div[role="option"][aria-selected="true"] {
-                background: rgba(56, 189, 248, 0.25) !important;
-                color: #38BDF8 !important;
-            }
-
-            /* Text & Label Overrides */
-            label, .stMarkdown label, div[data-testid="stWidgetLabel"] label {
-                color: #E2E8F0 !important;
-                font-weight: 500 !important;
-                font-size: 0.9rem !important;
-            }
-
-            /* Button Styling */
-            div.stButton > button[kind="primary"] {
-                background: linear-gradient(135deg, #0284c7 0%, #6366f1 100%) !important;
-                color: #FFFFFF !important;
-                border: none !important;
-                border-radius: 12px !important;
-                padding: 0.65rem 1.6rem !important;
+            /* ==========================================================================
+               TEXT & WIDGET LABELS CONTRAST FIX
+               ========================================================================== */
+            /* Textarea Label & Placeholder */
+            .stTextArea label, div[data-testid="stWidgetLabel"] label, div[data-testid="stWidgetLabel"] p {
+                color: var(--apple-text-primary) !important;
+                font-size: 0.925rem !important;
                 font-weight: 600 !important;
-                font-family: 'Outfit', sans-serif !important;
-                box-shadow: 0 4px 20px rgba(2, 132, 199, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            }
-            div.stButton > button[kind="primary"]:hover {
-                transform: translateY(-2px) !important;
-                box-shadow: 0 8px 25px rgba(99, 102, 241, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+                opacity: 1 !important;
             }
 
-            div.stButton > button:not([kind="primary"]) {
-                background: rgba(30, 41, 59, 0.6) !important;
-                backdrop-filter: blur(12px) !important;
-                color: #F8FAFC !important;
-                border: 1px solid rgba(255, 255, 255, 0.15) !important;
-                border-radius: 12px !important;
-                transition: all 0.3s ease !important;
+            .stTextArea textarea {
+                background-color: #FFFFFF !important;
+                color: var(--apple-text-primary) !important;
+                border: 1.5px solid var(--apple-border-strong) !important;
+                border-radius: var(--apple-radius-md) !important;
+                font-size: 0.95rem !important;
+                padding: 0.85rem 1rem !important;
+                line-height: 1.5 !important;
+                box-shadow: var(--apple-shadow-subtle) !important;
             }
-            div.stButton > button:not([kind="primary"]):hover {
-                border-color: rgba(56, 189, 248, 0.6) !important;
-                color: #38BDF8 !important;
-                box-shadow: 0 0 16px rgba(56, 189, 248, 0.25) !important;
+            .stTextArea textarea:focus {
+                border-color: var(--apple-blue) !important;
+                box-shadow: 0 0 0 4px var(--apple-blue-light) !important;
+            }
+            .stTextArea textarea::placeholder {
+                color: #86868B !important;
+                opacity: 1 !important;
             }
 
-            /* Brand Header Glass Container */
-            .np-brand-container {
+            /* Selectbox Label & Value */
+            .stSelectbox label, .stSelectbox label p {
+                color: var(--apple-text-primary) !important;
+                font-weight: 600 !important;
+                opacity: 1 !important;
+            }
+            div[data-baseweb="select"] > div {
+                background-color: #FFFFFF !important;
+                border-color: var(--apple-border-strong) !important;
+                border-radius: var(--apple-radius-md) !important;
+                color: var(--apple-text-primary) !important;
+            }
+            div[data-baseweb="select"] * {
+                color: var(--apple-text-primary) !important;
+            }
+
+            /* ==========================================================================
+               HERO BRAND & HEADERS
+               ========================================================================== */
+            .apple-hero-container {
                 text-align: center;
                 margin-bottom: 2rem;
-                padding: 1.75rem 1.5rem;
-                background: rgba(30, 41, 59, 0.35);
-                backdrop-filter: blur(20px) saturate(180%);
-                -webkit-backdrop-filter: blur(20px) saturate(180%);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 20px;
-                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+                padding: 0.5rem 0;
             }
-            .np-brand-title {
-                font-family: 'Outfit', sans-serif;
-                font-size: 2.6rem;
-                font-weight: 800;
-                background: linear-gradient(135deg, #38BDF8 0%, #818CF8 50%, #C084FC 100%);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                letter-spacing: -0.02em;
-                margin-bottom: 0.3rem;
-            }
-            .np-brand-subtitle {
-                font-size: 1.05rem;
-                font-weight: 400;
-                color: #CBD5E1;
-                margin-bottom: 0.5rem;
-            }
-
-            /* Trust Badges Bar */
-            .np-trust-bar {
-                display: flex;
-                justify-content: center;
-                gap: 1rem;
-                flex-wrap: wrap;
-                margin-top: 1rem;
-            }
-            .np-trust-badge {
+            .apple-pill-badge {
                 display: inline-flex;
                 align-items: center;
-                gap: 0.5rem;
-                background: rgba(15, 23, 42, 0.6);
-                backdrop-filter: blur(12px);
-                border: 1px solid rgba(255, 255, 255, 0.12);
-                border-radius: 9999px;
-                padding: 0.4rem 1rem;
-                font-size: 0.85rem;
-                font-weight: 500;
-                color: #E2E8F0;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-                transition: all 0.25s ease;
+                gap: 0.45rem;
+                background-color: var(--apple-blue-light);
+                border: 1px solid rgba(0, 113, 227, 0.18);
+                border-radius: var(--apple-radius-pill);
+                padding: 0.35rem 0.95rem;
+                font-size: 0.775rem;
+                font-weight: 600;
+                color: var(--apple-blue);
+                letter-spacing: 0.03em;
+                text-transform: uppercase;
+                margin-bottom: 0.85rem;
             }
-            .np-trust-badge:hover {
-                border-color: rgba(56, 189, 248, 0.4);
-                background: rgba(56, 189, 248, 0.12);
-                transform: translateY(-2px);
+            .apple-pulse-dot {
+                width: 6px;
+                height: 6px;
+                background-color: var(--apple-emerald);
+                border-radius: 50%;
+                box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.2);
             }
 
-            /* Information Scope Card (Disclaimer) */
-            .np-scope-card {
-                background: rgba(30, 41, 59, 0.45);
-                backdrop-filter: blur(18px) saturate(180%);
-                -webkit-backdrop-filter: blur(18px) saturate(180%);
-                border: 1px solid rgba(56, 189, 248, 0.3);
-                border-left: 4px solid #38BDF8;
-                border-radius: 16px;
-                padding: 1.35rem 1.5rem;
-                margin-bottom: 1.75rem;
-                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+            .apple-hero-title {
+                font-size: 2.75rem;
+                font-weight: 800;
+                color: var(--apple-text-primary);
+                letter-spacing: -0.03em;
+                line-height: 1.1;
+                margin-bottom: 0.6rem;
             }
-            .np-scope-title {
-                font-family: 'Outfit', sans-serif;
+            .apple-hero-title span.blue-accent {
+                color: var(--apple-blue);
+            }
+            .apple-hero-subtitle {
                 font-size: 1.05rem;
+                font-weight: 400;
+                color: var(--apple-text-secondary);
+                max-width: 580px;
+                margin: 0 auto;
+                line-height: 1.5;
+            }
+
+            /* ==========================================================================
+               TRUST BADGES ROW
+               ========================================================================== */
+            .apple-trust-row {
+                display: flex;
+                justify-content: center;
+                gap: 0.65rem;
+                flex-wrap: wrap;
+                margin-top: 1.35rem;
+                margin-bottom: 1.75rem;
+            }
+            .apple-trust-pill {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                background: #FFFFFF;
+                border: 1px solid var(--apple-border);
+                border-radius: var(--apple-radius-pill);
+                padding: 0.4rem 0.9rem;
+                font-size: 0.825rem;
                 font-weight: 600;
-                color: #38BDF8;
+                color: var(--apple-text-primary);
+                box-shadow: var(--apple-shadow-subtle);
+            }
+
+            /* ==========================================================================
+               CARDS & SCOPE TRANSPARENCY
+               ========================================================================== */
+            .apple-card {
+                background-color: #FFFFFF;
+                border: 1px solid var(--apple-border);
+                border-radius: var(--apple-radius-lg);
+                padding: 1.4rem 1.6rem;
+                margin-bottom: 1.75rem;
+                box-shadow: var(--apple-shadow-card);
+            }
+            .apple-card-title {
+                font-size: 1rem;
+                font-weight: 700;
+                color: var(--apple-text-primary);
                 display: flex;
                 align-items: center;
                 gap: 0.5rem;
                 margin-bottom: 0.4rem;
             }
-            .np-scope-text {
-                font-size: 0.925rem;
-                color: #CBD5E1;
-                line-height: 1.6;
+            .apple-card-desc {
+                font-size: 0.9rem;
+                color: var(--apple-text-secondary);
+                line-height: 1.55;
                 margin: 0;
             }
 
-            /* Privacy Notice Box */
-            .np-privacy-box {
-                background: rgba(16, 185, 129, 0.1);
-                backdrop-filter: blur(12px);
-                border: 1px solid rgba(16, 185, 129, 0.25);
-                border-radius: 12px;
-                padding: 0.75rem 1rem;
-                font-size: 0.85rem;
-                color: #6EE7B7;
-                margin-top: 0.5rem;
+            .apple-grid-split {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.85rem;
+                margin-top: 0.9rem;
+                padding-top: 0.9rem;
+                border-top: 1px solid rgba(0, 0, 0, 0.06);
+            }
+            .apple-grid-item {
+                font-size: 0.825rem;
+                color: var(--apple-text-primary);
+                line-height: 1.5;
+            }
+
+            /* Privacy Shield */
+            .apple-privacy-notice {
+                background: rgba(52, 199, 89, 0.08);
+                border: 1px solid rgba(52, 199, 89, 0.25);
+                border-radius: var(--apple-radius-md);
+                padding: 0.65rem 1rem;
+                font-size: 0.825rem;
+                color: #14532D;
                 margin-bottom: 1.25rem;
                 display: flex;
                 align-items: center;
                 gap: 0.5rem;
             }
 
-            /* Knowledge Article Response Container */
-            .np-article-card {
-                background: rgba(15, 23, 42, 0.75);
-                backdrop-filter: blur(24px) saturate(180%);
-                -webkit-backdrop-filter: blur(24px) saturate(180%);
-                border: 1px solid rgba(56, 189, 248, 0.35);
-                border-radius: 18px;
-                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            /* Article Container */
+            .apple-article-card {
+                background: #FFFFFF;
+                border: 1px solid var(--apple-border);
+                border-radius: var(--apple-radius-lg);
                 padding: 1.85rem;
                 margin-top: 1.5rem;
-                margin-bottom: 1.5rem;
+                margin-bottom: 1.75rem;
+                box-shadow: var(--apple-shadow-hover);
             }
-            .np-article-header {
+            .apple-article-header {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
                 padding-bottom: 0.9rem;
                 margin-bottom: 1.25rem;
+                border-bottom: 1px solid var(--apple-border);
+                flex-wrap: wrap;
+                gap: 0.5rem;
             }
-            .np-article-category {
+            .apple-category-badge {
+                background: var(--apple-blue-light);
+                color: var(--apple-blue);
+                border: 1px solid rgba(0, 113, 227, 0.18);
                 font-size: 0.775rem;
                 font-weight: 700;
                 text-transform: uppercase;
-                letter-spacing: 0.06em;
-                color: #38BDF8;
-                background: rgba(56, 189, 248, 0.12);
-                border: 1px solid rgba(56, 189, 248, 0.3);
-                padding: 0.3rem 0.8rem;
-                border-radius: 9999px;
+                letter-spacing: 0.04em;
+                padding: 0.3rem 0.75rem;
+                border-radius: var(--apple-radius-pill);
             }
-            .np-article-transparency {
-                font-size: 0.825rem;
-                color: #94A3B8;
+            .apple-article-body {
+                font-size: 1rem;
+                line-height: 1.65;
+                color: var(--apple-text-primary);
+            }
+            .apple-article-body h3 {
+                font-size: 1.15rem;
+                font-weight: 700;
+                color: var(--apple-text-primary);
+                margin-top: 1.4rem;
+                margin-bottom: 0.5rem;
+            }
+
+            /* Safety Refusal & Tip Cards */
+            .apple-refusal-card {
+                background: rgba(255, 59, 48, 0.06);
+                border: 1px solid rgba(255, 59, 48, 0.2);
+                border-radius: var(--apple-radius-md);
+                padding: 1.2rem 1.4rem;
+                margin-top: 1.25rem;
+                margin-bottom: 1.25rem;
+            }
+            .apple-refusal-title {
+                font-size: 0.95rem;
+                font-weight: 700;
+                color: #DC2626;
+                margin-bottom: 0.35rem;
                 display: flex;
                 align-items: center;
                 gap: 0.4rem;
             }
-            .np-article-body {
-                font-size: 1rem;
-                line-height: 1.7;
-                color: #F1F5F9;
+            .apple-refusal-text {
+                font-size: 0.875rem;
+                color: #991B1B;
+                line-height: 1.55;
+                margin: 0;
             }
 
-            /* Refusal / Warning Card */
-            .np-refusal-card {
-                background: rgba(239, 68, 68, 0.12);
-                backdrop-filter: blur(14px);
-                border: 1px solid rgba(239, 68, 68, 0.35);
-                border-left: 4px solid #EF4444;
-                border-radius: 14px;
-                padding: 1.25rem 1.5rem;
-                margin-top: 1rem;
+            .apple-tip-card {
+                background: #FFFFFF;
+                border: 1px solid var(--apple-border);
+                border-left: 4px solid var(--apple-blue);
+                border-radius: var(--apple-radius-md);
+                padding: 1rem 1.2rem;
+                font-size: 0.875rem;
+                color: var(--apple-text-secondary);
+                line-height: 1.55;
+                margin-bottom: 1.5rem;
+            }
+
+            /* Step Cards (Jurisdiction Navigator) */
+            .apple-step-card {
+                background: #FFFFFF;
+                border: 1px solid var(--apple-border);
+                border-radius: var(--apple-radius-md);
+                padding: 1.1rem 1.35rem;
                 margin-bottom: 1rem;
+                box-shadow: var(--apple-shadow-subtle);
             }
-            .np-refusal-title {
-                font-family: 'Outfit', sans-serif;
-                font-size: 1rem;
-                font-weight: 600;
-                color: #FCA5A5;
-                margin-bottom: 0.4rem;
-            }
-            .np-refusal-text {
-                font-size: 0.9rem;
-                color: #FECACA;
-                line-height: 1.6;
-            }
-
-            /* Tip / Guidance Card */
-            .np-tip-card {
-                background: rgba(30, 41, 59, 0.45);
-                backdrop-filter: blur(14px);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-left: 4px solid #818CF8;
-                border-radius: 12px;
-                padding: 1rem 1.25rem;
-                font-size: 0.9rem;
-                color: #CBD5E1;
-                margin-bottom: 1.25rem;
-            }
-
-            /* Step Card Overrides (backward compatibility) */
-            .np-step-card {
-                background: rgba(56, 189, 248, 0.08) !important;
-                border: 1px solid rgba(56, 189, 248, 0.2) !important;
-                border-left: 4px solid #38BDF8 !important;
-                border-radius: 12px !important;
-                padding: 0.75rem 1rem !important;
-                margin-top: 1.5rem !important;
-                margin-bottom: 0.85rem !important;
-                backdrop-filter: blur(12px) !important;
-            }
-            .np-step-header {
-                font-family: 'Outfit', sans-serif !important;
-                font-size: 0.95rem !important;
-                font-weight: 700 !important;
-                text-transform: uppercase !important;
-                letter-spacing: 0.05em !important;
-                color: #38BDF8 !important;
-                margin: 0 !important;
-                display: flex !important;
-                align-items: center !important;
-                gap: 0.75rem !important;
-            }
-
-            /* Step Section Headers for Jurisdiction Navigator */
-            .np-step-section-header {
-                display: flex;
-                align-items: center;
-                gap: 0.75rem;
-                font-family: 'Outfit', sans-serif;
-                font-size: 0.95rem;
+            .apple-step-header {
+                font-size: 0.85rem;
                 font-weight: 700;
                 text-transform: uppercase;
-                letter-spacing: 0.05em;
-                color: #38BDF8;
-                margin-top: 1.75rem;
-                margin-bottom: 0.85rem;
-                padding: 0.65rem 1rem;
-                background: rgba(56, 189, 248, 0.08);
-                border: 1px solid rgba(56, 189, 248, 0.2);
-                border-left: 4px solid #38BDF8;
-                border-radius: 12px;
-                backdrop-filter: blur(12px);
+                letter-spacing: 0.04em;
+                color: var(--apple-text-primary);
+                display: flex;
+                align-items: center;
+                gap: 0.55rem;
             }
-            .np-step-number {
-                background: linear-gradient(135deg, #0284c7 0%, #6366f1 100%);
+            .apple-step-badge {
+                background: var(--apple-text-primary);
                 color: #FFFFFF;
-                border-radius: 9999px;
-                width: 1.6rem;
-                height: 1.6rem;
+                border-radius: 50%;
+                width: 1.5rem;
+                height: 1.5rem;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 0.8rem;
+                font-size: 0.775rem;
                 font-weight: 700;
                 box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
             }
 
-            /* Discovery Card for Home Page */
-            .np-discovery-card {
-                background: linear-gradient(135deg, rgba(30, 58, 138, 0.4) 0%, rgba(67, 56, 202, 0.3) 100%);
-                backdrop-filter: blur(18px);
-                border: 1px solid rgba(99, 102, 241, 0.35);
-                border-radius: 18px;
-                padding: 1.4rem 1.6rem;
-                margin-top: 2.2rem;
-                margin-bottom: 1.5rem;
-                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            /* Dynamic Breadcrumb Bar */
+            .apple-breadcrumb-bar {
+                background: #FFFFFF;
+                border: 1px solid var(--apple-border);
+                border-radius: var(--apple-radius-md);
+                padding: 0.85rem 1.2rem;
+                margin-bottom: 1.35rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-size: 0.85rem;
+                color: var(--apple-text-primary);
+                flex-wrap: wrap;
+                box-shadow: var(--apple-shadow-subtle);
             }
-            .np-discovery-title {
-                font-family: 'Outfit', sans-serif;
-                font-size: 1.1rem;
+            .apple-breadcrumb-tag {
+                background: var(--apple-bg);
+                border: 1px solid var(--apple-border-strong);
+                border-radius: var(--apple-radius-pill);
+                padding: 0.25rem 0.7rem;
+                font-size: 0.8rem;
                 font-weight: 600;
-                color: #93C5FD;
-                margin-bottom: 0.3rem;
-            }
-            .np-discovery-text {
-                font-size: 0.925rem;
-                color: #E0E7FF;
+                color: var(--apple-text-primary);
             }
 
-            /* Footer Styling */
-            .np-footer {
-                text-align: center;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-                padding-top: 2rem;
-                margin-top: 3.5rem;
-                font-size: 0.85rem;
-                color: #94A3B8;
+            /* Feature Banner */
+            .apple-discovery-banner {
+                background: linear-gradient(135deg, #1D1D1F 0%, #0071E3 100%);
+                border-radius: var(--apple-radius-lg);
+                padding: 1.6rem 1.8rem;
+                margin-top: 2.25rem;
+                margin-bottom: 1.5rem;
+                color: #FFFFFF !alignment;
+                box-shadow: var(--apple-shadow-card);
             }
-            .np-footer-brand {
-                font-family: 'Outfit', sans-serif;
+            .apple-discovery-title {
+                font-size: 1.15rem;
+                font-weight: 700;
+                color: #FFFFFF !important;
+                margin-bottom: 0.35rem;
+                letter-spacing: -0.02em;
+            }
+            .apple-discovery-text {
+                font-size: 0.9rem;
+                color: rgba(255, 255, 255, 0.9) !important;
+                line-height: 1.5;
+            }
+
+            /* ==========================================================================
+               SIDEBAR & RADIO NAVIGATION CONTRAST FIX
+               ========================================================================== */
+            section[data-testid="stSidebar"] {
+                background-color: var(--apple-sidebar-bg) !important;
+                border-right: 1px solid var(--apple-border) !important;
+            }
+            section[data-testid="stSidebar"] .block-container {
+                padding-top: 1.5rem !important;
+            }
+            section[data-testid="stSidebar"] * {
+                color: var(--apple-text-primary) !important;
+            }
+
+            /* Radio Buttons Fix: Visible, Crisp Text & Apple Pill Layout */
+            div[data-testid="stRadio"] div[role="radiogroup"] {
+                gap: 0.4rem !important;
+                display: flex !important;
+                flex-direction: column !important;
+            }
+            div[data-testid="stRadio"] div[role="radiogroup"] label {
+                display: flex !important;
+                align-items: center !important;
+                gap: 0.5rem !important;
+                background: #FFFFFF !important;
+                border: 1px solid var(--apple-border-strong) !important;
+                border-radius: var(--apple-radius-md) !important;
+                padding: 0.6rem 0.9rem !important;
+                font-size: 0.9rem !important;
+                font-weight: 600 !important;
+                color: var(--apple-text-primary) !important;
+                cursor: pointer !important;
+                transition: all 0.2s ease !important;
+                box-shadow: var(--apple-shadow-subtle) !important;
+            }
+            div[data-testid="stRadio"] div[role="radiogroup"] label:hover {
+                border-color: var(--apple-blue) !important;
+                background: #F0F7FF !important;
+                color: var(--apple-blue) !important;
+            }
+            div[data-testid="stRadio"] div[role="radiogroup"] label[data-checked="true"],
+            div[data-testid="stRadio"] div[role="radiogroup"] label:has(input:checked) {
+                background: var(--apple-blue) !important;
+                border-color: var(--apple-blue) !important;
+                color: #FFFFFF !important;
+                box-shadow: 0 3px 10px rgba(0, 113, 227, 0.3) !important;
+            }
+            div[data-testid="stRadio"] div[role="radiogroup"] label * {
+                color: inherit !important;
+                font-size: 0.9rem !important;
+                font-weight: 600 !important;
+            }
+
+            /* Sidebar Expanders Fix: Clear Dark Text on Clean White Cards */
+            div[data-testid="stExpander"] {
+                background-color: #FFFFFF !important;
+                border: 1px solid var(--apple-border-strong) !important;
+                border-radius: var(--apple-radius-md) !important;
+                box-shadow: var(--apple-shadow-subtle) !important;
+                margin-bottom: 0.6rem !important;
+                overflow: hidden !important;
+            }
+            div[data-testid="stExpander"] details summary {
+                background-color: #F5F5F7 !important;
+                border-bottom: 1px solid var(--apple-border) !important;
+                padding: 0.65rem 0.85rem !important;
+            }
+            div[data-testid="stExpander"] details summary * {
+                color: var(--apple-text-primary) !important;
+                font-weight: 600 !important;
+                font-size: 0.875rem !important;
+            }
+
+            div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] {
+                background-color: #FFFFFF !important;
+                padding: 0.75rem 0.85rem !important;
+            }
+            div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] * {
+                color: #2C2C2E !important;
+                font-size: 0.85rem !important;
+                line-height: 1.5 !important;
+            }
+
+            /* ==========================================================================
+               BUTTONS (Primary & Secondary)
+               ========================================================================== */
+            /* Primary Action Button */
+            div.stButton > button[kind="primary"] {
+                background: linear-gradient(180deg, #0077ED 0%, #0066CC 100%) !important;
+                color: #FFFFFF !important;
+                border: none !important;
+                border-radius: var(--apple-radius-pill) !important;
+                padding: 0.65rem 1.6rem !important;
+                font-weight: 600 !important;
+                font-size: 0.95rem !important;
+                letter-spacing: -0.01em !important;
+                box-shadow: 0 4px 14px rgba(0, 113, 227, 0.25) !important;
+                transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            }
+            div.stButton > button[kind="primary"]:hover {
+                transform: scale(1.015) !important;
+                box-shadow: 0 6px 20px rgba(0, 113, 227, 0.35) !important;
+            }
+
+            /* Secondary Action Button */
+            div.stButton > button:not([kind="primary"]) {
+                background: #FFFFFF !important;
+                color: var(--apple-text-primary) !important;
+                border: 1px solid var(--apple-border-strong) !important;
+                border-radius: var(--apple-radius-pill) !important;
+                font-weight: 500 !important;
+                font-size: 0.875rem !important;
+                transition: all 0.2s ease !important;
+                box-shadow: var(--apple-shadow-subtle) !important;
+            }
+            div.stButton > button:not([kind="primary"]):hover {
+                background: var(--apple-bg) !important;
+                border-color: var(--apple-blue) !important;
+                color: var(--apple-blue) !important;
+            }
+
+            /* Engine Status Widget */
+            .apple-sidebar-status {
+                background: #FFFFFF;
+                border: 1px solid var(--apple-border-strong);
+                border-radius: var(--apple-radius-md);
+                padding: 0.85rem 1rem;
+                font-size: 0.8rem;
+                box-shadow: var(--apple-shadow-subtle);
+                margin-top: 1.5rem;
+            }
+            .apple-status-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 0.35rem;
+                color: var(--apple-text-secondary) !important;
+            }
+            .apple-status-row:last-child {
+                margin-bottom: 0;
+            }
+            .apple-status-val {
                 font-weight: 600;
-                color: #F8FAFC;
-                margin-bottom: 0.3rem;
+                color: var(--apple-emerald) !important;
             }
-            .np-footer-notice {
+
+            /* Footer */
+            .apple-footer {
+                text-align: center;
+                border-top: 1px solid var(--apple-border);
+                padding-top: 2rem;
+                margin-top: 4rem;
+                font-size: 0.825rem;
+                color: var(--apple-text-tertiary) !important;
+            }
+            .apple-footer-title {
+                font-weight: 700;
+                color: var(--apple-text-primary) !important;
+                font-size: 0.95rem;
+                margin-bottom: 0.35rem;
+            }
+            .apple-footer-text {
                 font-size: 0.775rem;
-                color: #64748B;
-                margin-top: 0.4rem;
+                color: var(--apple-text-secondary) !important;
+                max-width: 580px;
+                margin: 0.4rem auto 0 auto;
+                line-height: 1.5;
             }
         </style>
     """, unsafe_allow_html=True)
 
 
 def render_brand_header():
-    """Render institutional civic glassmorphic header."""
+    """Render Apple-style minimalist hero header."""
     st.markdown("""
-        <div class="np-brand-container">
-            <div class="np-brand-title">⚖️ NYAYAPATH</div>
-            <div class="np-brand-subtitle">Public Legal Information & Judicial Court Process Education</div>
-            <div class="np-trust-bar">
-                <div class="np-trust-badge">
-                    <span class="np-trust-badge-icon">📖</span> Educational Information
-                </div>
-                <div class="np-trust-badge">
-                    <span class="np-trust-badge-icon">🔒</span> Privacy-Conscious
-                </div>
-                <div class="np-trust-badge">
-                    <span class="np-trust-badge-icon">🛡️</span> AI-Assisted & Safety-Engine Protected
-                </div>
+        <div class="apple-hero-container">
+            <div class="apple-pill-badge">
+                <span class="apple-pulse-dot"></span>
+                <span>Civic Legal Knowledge Platform</span>
+            </div>
+            <div class="apple-hero-title">
+                NyayaPath<span class="blue-accent">.</span>
+            </div>
+            <div class="apple-hero-subtitle">
+                Accessible, plain-language judicial court process education and procedural guidance for every citizen.
             </div>
         </div>
     """, unsafe_allow_html=True)
 
 
 def render_trust_bar():
-    """Compatibility helper (now combined in brand header)."""
-    pass
+    """Render Apple-style trust pills row."""
+    st.markdown("""
+        <div class="apple-trust-row">
+            <div class="apple-trust-pill">
+                <span>📖</span> Plain Language
+            </div>
+            <div class="apple-trust-pill">
+                <span>🔒</span> Zero Data Retention
+            </div>
+            <div class="apple-trust-pill">
+                <span>🛡️</span> Active Safety Engine
+            </div>
+            <div class="apple-trust-pill">
+                <span>🏛️</span> Jurisdiction-Aware
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
 
 
 def render_information_scope_card():
-    """Render non-alarming information scope card."""
+    """Render Apple-style clean card with scope transparency."""
     st.markdown("""
-        <div class="np-scope-card">
-            <div class="np-scope-title">ⓘ Information Scope & Purpose</div>
-            <p class="np-scope-text">
-                NyayaPath provides general educational information about court procedures, case flows, and legal terminology. 
-                It does <strong>not</strong> provide personalized legal advice, suggest litigation tactics, predict court outcomes, 
-                or represent you in legal matters. For personal legal counsel, please consult a qualified advocate.
+        <div class="apple-card">
+            <div class="apple-card-title">
+                <span>ⓘ</span> Educational Purpose & Scope Transparency
+            </div>
+            <p class="apple-card-desc">
+                NyayaPath provides neutral educational information to help citizens understand legal processes, terminology, and typical court stages.
             </p>
+            <div class="apple-grid-split">
+                <div class="apple-grid-item">
+                    ✅ <strong>What it provides:</strong> General procedural breakdowns, document functions, and case flow explanations.
+                </div>
+                <div class="apple-grid-item">
+                    🚫 <strong>What it avoids:</strong> Personalized legal counsel, case strategy, outcome predictions, or formal representation.
+                </div>
+            </div>
         </div>
     """, unsafe_allow_html=True)
 
 
 def render_privacy_notice():
-    """Render subtle privacy reminder."""
+    """Render Apple privacy shield badge."""
     st.markdown("""
-        <div class="np-privacy-box">
+        <div class="apple-privacy-notice">
             <span>🔒</span>
-            <span><strong>Privacy Reminder:</strong> Avoid entering sensitive personal identification numbers, bank details, or private case numbers.</span>
+            <span><strong>Privacy Shield:</strong> Never enter sensitive personal identifiers (SSN/Aadhaar), bank details, or private case numbers.</span>
         </div>
     """, unsafe_allow_html=True)
 
 
 def render_footer():
-    """Render civic footer."""
+    """Render Apple minimal civic footer."""
     st.markdown("""
-        <div class="np-footer">
-            <div class="np-footer-brand">NYAYAPATH — Independent Civic Legal Education Platform</div>
-            <div>Educational Information • AI-Assisted • Safety-Engine Protected</div>
-            <div class="np-footer-notice">Not legal advice. Verify important procedures with official court portals (e.g. eCourts India). © 2026 NyayaPath</div>
+        <div class="apple-footer">
+            <div class="apple-footer-title">
+                NyayaPath — Public Legal Information Platform
+            </div>
+            <div>Educational Purpose • AI Safety-Engine Protected • eCourts Aligned</div>
+            <div class="apple-footer-text">
+                Disclaimer: NyayaPath provides educational information only and does not constitute formal legal counsel. 
+                Always verify court procedures with official court registries or consult a licensed attorney. © 2026 NyayaPath.
+            </div>
         </div>
     """, unsafe_allow_html=True)
