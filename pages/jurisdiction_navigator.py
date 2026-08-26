@@ -72,10 +72,10 @@ def render_jurisdiction_navigator_page():
         </div>
     """, unsafe_allow_html=True)
 
-    # Step 1 Card: Jurisdiction
+    # Step 1 Section Header
     st.markdown("""
-        <div class="np-step-card">
-            <div class="np-step-header"><span class="np-step-number">1</span> Select Jurisdiction & Region</div>
+        <div class="np-step-section-header">
+            <span class="np-step-number">1</span> Select Jurisdiction & Region
         </div>
     """, unsafe_allow_html=True)
     
@@ -99,10 +99,10 @@ def render_jurisdiction_navigator_page():
             key=f"{JURISDICTION_PREFIX}select_state"
         )
 
-    # Step 2 Card: Court Level & Domain
+    # Step 2 Section Header
     st.markdown("""
-        <div class="np-step-card">
-            <div class="np-step-header"><span class="np-step-number">2</span> Select Court Level & Legal Domain</div>
+        <div class="np-step-section-header">
+            <span class="np-step-number">2</span> Select Court Level & Legal Domain
         </div>
     """, unsafe_allow_html=True)
 
@@ -125,10 +125,10 @@ def render_jurisdiction_navigator_page():
             key=f"{JURISDICTION_PREFIX}select_domain"
         )
 
-    # Step 3 Card: Question
+    # Step 3 Section Header
     st.markdown("""
-        <div class="np-step-card">
-            <div class="np-step-header"><span class="np-step-number">3</span> Enter Your Question</div>
+        <div class="np-step-section-header">
+            <span class="np-step-number">3</span> Enter Your Question
         </div>
     """, unsafe_allow_html=True)
     
