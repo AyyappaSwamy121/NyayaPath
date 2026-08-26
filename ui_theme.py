@@ -356,6 +356,7 @@ def inject_custom_css():
                 justify-content: center;
                 font-size: 0.775rem;
                 font-weight: 700;
+                box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
             }
 
             /* Dynamic Breadcrumb Bar */

@@ -86,7 +86,7 @@ def render_jurisdiction_navigator_page():
         </div>
     """, unsafe_allow_html=True)
 
-    # Step 1 Card: Jurisdiction
+    # Step 1 Section Header
     st.markdown("""
         <div class="apple-step-card">
             <div class="apple-step-header">
@@ -116,7 +116,7 @@ def render_jurisdiction_navigator_page():
             key=f"{JURISDICTION_PREFIX}select_state"
         )
 
-    # Step 2 Card: Court Level & Domain
+    # Step 2 Section Header
     st.markdown("""
         <div class="apple-step-card">
             <div class="apple-step-header">
